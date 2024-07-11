@@ -4,12 +4,12 @@ from QueryProfile import BaseQueryProfile
 class AthenaQueryProfile(BaseQueryProfile):
     ID = "athena"
 
-    def __init__(self, bearer_token: str, account_id: str) -> None:
-        super().__init__(bearer_token, account_id)
-
-    def __init__(self, profile):
-        self.profile = profile
-        super().__init__(download_profile=False)
+    def __init__(self, bearer_token: str = None, account_id: str = None, profile=None) -> None:
+        if profile:
+            self.profile = profile
+            super().__init__(download_profile=False)
+        else:
+            super().__init__(bearer_token, account_id)
 
     def get_skins(self):
         """Gets skins"""

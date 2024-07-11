@@ -4,7 +4,7 @@ from AthenaQueryProfile import AthenaQueryProfile
 
 # read file as json
 profile = json.load(open("profile.json"))
-athena = AthenaQueryProfile(profile)
+athena = AthenaQueryProfile(profile=profile)
 # profile = get_profile("", "")
 skins = athena.get_skins()
 backpacks = athena.get_backpacks()

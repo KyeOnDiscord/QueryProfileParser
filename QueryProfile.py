@@ -8,7 +8,7 @@ def get_profile(account_id: str, bearer_token: str, profile_type: ProfileType):
     match profile_type:
         case ProfileType.Athena:
             from AthenaQueryProfile import AthenaQueryProfile
-            return AthenaQueryProfile(account_id, bearer_token)
+            return AthenaQueryProfile(account_id=account_id, bearer_token=bearer_token)
         case _:
             raise Exception("Invalid Profile Type")
 
@@ -29,11 +29,11 @@ class BaseQueryProfile:
         self.responseVersion = self.profile['responseVersion']
 
         self.__get_template_ids()
-        # print("\n".join(self.__get_template_ids()))
+        print("\n".join(self.__get_template_ids()))
 
     def __download_profile(self):
         url = BASE_MCP_URL + \
-            f"/{self.account_id}/client/QueryProfile?profileId={self.profile_id}"
+            f"/{self.account_id}/client/QueryProfile?profileId={self.account_id}"
         headers = {
             'Content-Type': 'application/json',
             'Authorization': f'Bearer {self.bearer_token}'

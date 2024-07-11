@@ -1,0 +1,10 @@
+[project]
+name = "fortnite-query-profile-parser"
+version = "0.0.1"
+dependencies = [
+    "requests",
+    'importlib-metadata; python_version<"3.10"',
+]
+description = "A parser for Fortnite's query profile data."
+license = "MIT"
+readme = "README.md"
