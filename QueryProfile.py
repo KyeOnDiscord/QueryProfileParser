@@ -15,6 +15,7 @@ def get_profile(account_id: str, bearer_token: str, profile_type: ProfileType):
 
 class BaseQueryProfile:
     def __init__(self, bearer_token: str = None, account_id: str = None, download_profile: bool = True):
+        self.profile_id = ProfileType.CommonCore
         if download_profile:
             self.bearer_token = bearer_token
             self.account_id = account_id
@@ -31,9 +32,9 @@ class BaseQueryProfile:
         self.__get_template_ids()
         print("\n".join(self.__get_template_ids()))
 
-    def __download_profile(self):
+    def __download_profile(self, profile_type: ProfileType = ProfileType.Athena):
         url = BASE_MCP_URL + \
-            f"/{self.account_id}/client/QueryProfile?profileId={self.account_id}"
+            f"/{self.account_id}/client/QueryProfile?profileId={profile_type.value}"
         headers = {
             'Content-Type': 'application/json',
             'Authorization': f'Bearer {self.bearer_token}'
@@ -65,6 +66,7 @@ class BaseQueryProfile:
     def __get_template_ids(self):
         items = (self.profile['profileChanges'][0]['profile']['items']).items()
         result = []
+        # pylint: disable=unused-variable
         for item_id, item_data in items:
             result.append(item_data["templateId"].split(":")[0])
         return list(set(result))

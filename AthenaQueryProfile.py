@@ -1,10 +1,9 @@
 from QueryProfile import BaseQueryProfile
-
+from ProfileTypes import ProfileType
 
 class AthenaQueryProfile(BaseQueryProfile):
-    ID = "athena"
-
     def __init__(self, bearer_token: str = None, account_id: str = None, profile=None) -> None:
+        self.profile_id = ProfileType.Athena
         if profile:
             self.profile = profile
             super().__init__(download_profile=False)
